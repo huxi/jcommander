@@ -747,7 +747,6 @@ public class JCommander {
 
   /**
    * @param type The class of the field
-   * @param annotation The annotation
    * @param value The value to convert
    */
   public Object convertValue(Field field, Class type, String value) {

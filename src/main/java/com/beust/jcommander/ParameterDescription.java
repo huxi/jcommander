@@ -135,8 +135,6 @@ public class ParameterDescription {
   /**
    * Add the specified value to the field. First look up any field converter, then
    * any type converter, and if we can't find any, throw an exception.
-   * 
-   * @param markAdded if true, mark this parameter as assigned
    */
   public void addValue(String value, boolean isDefault) {
     p("Adding " + (isDefault ? "default " : "") + "value:" + value
