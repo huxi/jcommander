@@ -23,9 +23,9 @@ import com.beust.jcommander.converters.StringConverter;
 import com.beust.jcommander.internal.DefaultConverterFactory;
 import com.beust.jcommander.internal.Lists;
 import com.beust.jcommander.internal.Maps;
+import com.beust.jcommander.internal.PasswordReaderFactory;
 
 import java.io.BufferedReader;
-import java.io.Console;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
@@ -413,6 +413,7 @@ public class JCommander {
     }
   }
 
+
   /**
    * Main method that parses the values and initializes the fields accordingly.
    */
@@ -436,15 +437,16 @@ public class JCommander {
         if (pd != null) {
           if (pd.getParameter().password()) {
             //
-            // Password option, use the Console to retrieve the password
+            // Password option, use the IPasswordReader to retrieve the password
             //
-            Console console = System.console();
-            if (console == null) {
-              throw new ParameterException("No console is available to get parameter " + a);
+            IPasswordReader reader = PasswordReaderFactory.getInstance();
+
+            String password = reader.readPassword();
+            if (password == null) {
+              throw new ParameterException("Could not read password for parameter " + a);
             }
             System.out.print("Value for " + a + " (" + pd.getDescription() + "):");
-            char[] password = console.readPassword();
-            pd.addValue(new String(password));
+            pd.addValue(password);
           } else {
             //
             // Regular option
