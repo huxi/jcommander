@@ -28,7 +28,8 @@ public class PasswordReaderFactory {
     try {
       r=new Java6PasswordReader();
     }
-    catch (RuntimeException ex) {
+    catch (Throwable ex) {
+      // e.g. NoSuchMethodError, IllegalStateException 
       r=new Java5PasswordReader();
     }
     instance=r;
