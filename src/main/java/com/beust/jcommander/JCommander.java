@@ -441,11 +441,12 @@ public class JCommander {
             //
             IPasswordReader reader = PasswordReaderFactory.getInstance();
 
+            System.out.print("Value for " + a + " (" + pd.getDescription() + "):");
+            System.out.flush();
             String password = reader.readPassword();
             if (password == null) {
               throw new ParameterException("Could not read password for parameter " + a);
             }
-            System.out.print("Value for " + a + " (" + pd.getDescription() + "):");
             pd.addValue(password);
           } else {
             //
