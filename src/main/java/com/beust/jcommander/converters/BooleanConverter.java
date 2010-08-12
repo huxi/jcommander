@@ -26,7 +26,6 @@ public class BooleanConverter extends BaseConverter<Boolean> {
     super(optionName);
   }
 
-  @Override
   public Boolean convert(String value) {
     if ("false".equalsIgnoreCase(value) || "true".equalsIgnoreCase(value)) {
       return Boolean.parseBoolean(value);
