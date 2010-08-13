@@ -21,7 +21,7 @@ package com.beust.jcommander.internal;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Sets {
+public final class Sets {
 
   private Sets() {}
 

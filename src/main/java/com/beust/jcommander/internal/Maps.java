@@ -21,7 +21,7 @@ package com.beust.jcommander.internal;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Maps {
+public final class Maps {
 
   private Maps() {}
 

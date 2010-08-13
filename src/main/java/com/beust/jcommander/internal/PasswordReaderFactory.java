@@ -20,7 +20,7 @@ package com.beust.jcommander.internal;
 
 import com.beust.jcommander.IPasswordReader;
 
-public class PasswordReaderFactory {
+public final class PasswordReaderFactory {
   private static final IPasswordReader INSTANCE;
 
   private PasswordReaderFactory() {}
