@@ -35,17 +35,17 @@ public @interface Parameters {
   static final String DEFAULT_OPTION_PREFIXES = "-";
 
   /**
-   * The name of the resource bundle to use for this class.
+   * @return The name of the resource bundle to use for this class.
    */
   String resourceBundle() default "";
 
   /**
-   * The character(s) that separate options.
+   * @return The character(s) that separate options.
    */
   String separators() default " ";
 
   /**
-   * What characters an option starts with.
+   * @return What characters an option starts with.
    */
   String optionPrefixes() default DEFAULT_OPTION_PREFIXES;
 }
