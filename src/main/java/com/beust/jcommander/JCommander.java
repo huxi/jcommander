@@ -35,6 +35,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -124,7 +125,7 @@ public class JCommander {
 
   static {
     CONVERTER_FACTORIES.add(new DefaultConverterFactory());
-  };
+  }
 
   public JCommander(Object object) {
     init(object, null);
@@ -151,9 +152,7 @@ public class JCommander {
       }
     } else if (object.getClass().isArray()) {
       // Array
-      for (Object o : (Object[]) object) {
-        m_objects.add(o);
-      }
+      m_objects.addAll(Arrays.asList((Object[]) object));
     } else {
       // Single object
       m_objects.add(object);
@@ -237,14 +236,12 @@ public class JCommander {
     List<String> vResult2 = Lists.newArrayList();
     for (int i = 0; i < vResult1.size(); i++) {
       String arg = vResult1.get(i);
-      String[] v1 = vResult1.toArray(new String[0]);
+      String[] v1 = vResult1.toArray(new String[vResult1.size()]);
       if (isOption(v1, arg)) {
         String sep = getSeparatorFor(v1, arg);
         if (! " ".equals(sep)) {
           String[] sp = arg.split("[" + sep + "]");
-          for (String ssp : sp) {
-            vResult2.add(ssp);
-          }
+          vResult2.addAll(Arrays.asList(sp));
         } else {
           vResult2.add(arg);
         }
@@ -502,14 +499,13 @@ public class JCommander {
             // Regular (non-command) parsing
             //
             List mp = getMainParameter(arg);
-            String value = arg;
-            Object convertedValue = value;
+            Object convertedValue = arg;
  
             if (m_mainParameterField.getGenericType() instanceof ParameterizedType) {
               ParameterizedType p = (ParameterizedType) m_mainParameterField.getGenericType();
               Type cls = p.getActualTypeArguments()[0];
               if (cls instanceof Class) {
-                convertedValue = convertValue(m_mainParameterField, (Class) cls, value);
+                convertedValue = convertValue(m_mainParameterField, (Class) cls, arg);
               }
             }
  
@@ -647,10 +643,10 @@ public class JCommander {
     // First line of the usage
     //
     String programName = m_programName != null ? m_programName : "<main class>";
-    out.append("Usage: " + programName + " [options]");
+    out.append("Usage: ").append(programName).append(" [options]");
     if (hasCommands) out.append(" [command] [command options]");
     if (m_mainParameterAnnotation != null) {
-      out.append(" " + m_mainParameterAnnotation.description());
+      out.append(" ").append(m_mainParameterAnnotation.description());
     }
     out.append("\n  Options:\n");
 
@@ -685,13 +681,12 @@ public class JCommander {
     for (ParameterDescription pd : sorted) {
       int l = pd.getNames().length();
       int spaceCount = longestName - l;
-      out.append("  "
-          + (pd.getParameter().required() ? "* " : "  ")
-          + pd.getNames() + s(spaceCount) + pd.getDescription());
+      out.append("  ").append(pd.getParameter().required() ? "* " : "  ")
+          .append(pd.getNames()).append(s(spaceCount)).append(pd.getDescription());
       try {
         if (! pd.wasAssigned()) {
           Object def = pd.getField().get(pd.getObject());
-          if (def != null) out.append(" (default: " + def + ")");
+          if (def != null) out.append(" (default: ").append(def).append(")");
         }
       } catch (IllegalArgumentException e) {
         // ignore
@@ -712,7 +707,7 @@ public class JCommander {
         int spaceCount  = ln - name.length();
         Object o = commands.getValue();
         JCommander jc = new JCommander(o);
-        out.append("    " + name + s(spaceCount) + jc.getMainParameterDescription() + "\n");
+        out.append("    ").append(name).append(s(spaceCount)).append(jc.getMainParameterDescription()).append("\n");
       }
     }
   }
@@ -829,11 +824,9 @@ public class JCommander {
       }
     }
 
-    IStringConverter<?> result = stringCtor != null
+    return stringCtor != null
         ? stringCtor.newInstance(optionName)
         : ctor.newInstance();
-
-        return result;
   }
 
   /**
