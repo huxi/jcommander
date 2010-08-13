@@ -809,7 +809,7 @@ public class JCommander {
 
   private IStringConverter<?> instantiateConverter(String optionName,
       Class<? extends IStringConverter<?>> converterClass)
-      throws IllegalArgumentException, InstantiationException, IllegalAccessException,
+      throws InstantiationException, IllegalAccessException,
       InvocationTargetException {
     Constructor<IStringConverter<?>> ctor = null;
     Constructor<IStringConverter<?>> stringCtor = null;
