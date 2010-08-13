@@ -23,6 +23,8 @@ import com.beust.jcommander.IPasswordReader;
 public class PasswordReaderFactory {
   private static final IPasswordReader instance;
 
+  private PasswordReaderFactory() {}
+
   static {
     IPasswordReader r;
     try {
