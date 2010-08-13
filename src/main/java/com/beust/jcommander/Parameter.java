@@ -33,43 +33,44 @@ public @interface Parameter {
    * An array of allowed command line parameters (e.g. "-d", "--outputdir", etc...).
    * If this attribute is omitted, the field it's annotating will receive all the
    * unparsed options. There can only be at most one such annotation.
+   * @return An array of allowed command line parameters. 
    */
   String[] names() default {};
 
   /**
-   * A description of this option.
+   * @return A description of this option.
    */
   String description() default "";
 
   /**
-   * Whether this option is required.
+   * @return Whether this option is required.
    */
   boolean required() default false;
 
   /**
-   * The key used to find the string in the message bundle.
+   * @return The key used to find the string in the message bundle.
    */
   String descriptionKey() default "";
 
   /**
    * How many parameter values this parameter will consume. For example,
    * an arity of 2 will allow "-pair value1 value2".
+   * @return How many parameter values this parameter will consume.
    */
   int arity() default -1;
 
   /**
-   * If true, this parameter is a password and it will be prompted on the console
-   * (if available).
+   * @return true if this parameter is a password and it will be prompted on the console.
    */
   boolean password() default false;
 
   /**
-   * The string converter to use for this field.
+   * @return The string converter to use for this field.
    */
   Class<? extends IStringConverter<?>> converter() default NoConverter.class;
 
   /**
-   * If true, this parameter won't appear in the usage().
+   * @return true if this parameter won't appear in the usage().
    */
   boolean hidden() default false;
 }
