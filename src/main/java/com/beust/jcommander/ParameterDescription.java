@@ -46,7 +46,6 @@ public class ParameterDescription {
 
   /**
    * Find the resource bundle in the annotations.
-   * @return
    */
   private ResourceBundle findResourceBundle(Object o) {
     ResourceBundle result = null;
