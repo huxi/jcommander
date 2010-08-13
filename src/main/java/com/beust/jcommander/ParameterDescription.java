@@ -149,7 +149,7 @@ public class ParameterDescription {
     if (! isDefault) m_assigned = true;
     Object convertedValue = m_jCommander.convertValue(this, value);
     boolean isCollection = Collection.class.isAssignableFrom(type);
-    boolean isMainParameter = m_parameterAnnotation.names().length == 0;
+    //boolean isMainParameter = m_parameterAnnotation.names().length == 0;
 
     try {
       if (isCollection) {
