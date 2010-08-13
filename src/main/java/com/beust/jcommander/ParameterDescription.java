@@ -21,8 +21,10 @@ package com.beust.jcommander;
 
 import com.beust.jcommander.internal.Lists;
 
+import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
