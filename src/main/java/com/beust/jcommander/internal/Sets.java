@@ -23,6 +23,8 @@ import java.util.Set;
 
 public class Sets {
 
+  private Sets() {}
+
   public static <K> Set<K> newHashSet() {
     return new HashSet<K>();
   }

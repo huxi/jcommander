@@ -24,6 +24,8 @@ import java.util.List;
 
 public class Lists {
 
+  private Lists() {}
+
   public static <K> List<K> newArrayList() {
     return new ArrayList<K>();
   }
