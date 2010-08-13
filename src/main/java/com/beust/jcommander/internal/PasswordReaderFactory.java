@@ -21,7 +21,7 @@ package com.beust.jcommander.internal;
 import com.beust.jcommander.IPasswordReader;
 
 public class PasswordReaderFactory {
-  private static final IPasswordReader instance;
+  private static final IPasswordReader INSTANCE;
 
   private PasswordReaderFactory() {}
 
@@ -34,10 +34,10 @@ public class PasswordReaderFactory {
       // e.g. NoSuchMethodError, IllegalStateException 
       r=new Java5PasswordReader();
     }
-    instance=r;
+    INSTANCE =r;
   }
   
   public static IPasswordReader getInstance() {
-    return instance;
+    return INSTANCE;
   }
 }
