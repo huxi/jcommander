@@ -321,8 +321,9 @@ public class JCommander {
   private static List<String> readFile(String fileName) {
     List<String> result = Lists.newArrayList();
 
+    BufferedReader bufRead=null;
     try {
-      BufferedReader bufRead = new BufferedReader(new FileReader(fileName));
+      bufRead = new BufferedReader(new FileReader(fileName));
 
       String line;
 
@@ -330,11 +331,19 @@ public class JCommander {
       while ((line = bufRead.readLine()) != null) {
         result.add(line);
       }
-
-      bufRead.close();
     }
     catch (IOException e) {
       throw new ParameterException("Could not read file " + fileName + ": " + e);
+    }
+    finally {
+      if(bufRead != null) {
+        try {
+          bufRead.close();
+        }
+        catch(IOException ex) {
+          // ignore
+        }
+      }
     }
 
     return result;
