@@ -38,7 +38,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -669,11 +668,7 @@ public class JCommander {
     //
     // Sort the options
     //
-    Collections.sort(sorted, new Comparator<ParameterDescription>() {
-      public int compare(ParameterDescription arg0, ParameterDescription arg1) {
-        return arg0.getNames().toLowerCase().compareTo(arg1.getNames().toLowerCase());
-      }
-    });
+    Collections.sort(sorted, new ParameterDescription.ByNameComparator());
 
     //
     // Display all the names and descriptions

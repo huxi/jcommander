@@ -191,4 +191,13 @@ public class ParameterDescription {
   public String toString() {
     return "[ParameterDescription " + m_field.getName() + "]";
   }
+
+  public static class ByNameComparator
+    implements  Comparator<ParameterDescription>, Serializable {
+    private static final long serialVersionUID = 5519438549807585994L;
+
+    public int compare(ParameterDescription arg0, ParameterDescription arg1) {
+        return arg0.getNames().toLowerCase().compareTo(arg1.getNames().toLowerCase());
+      }
+    }
 }
