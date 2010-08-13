@@ -34,7 +34,6 @@ public class ParameterDescription {
   private Field m_field;
   /** Keep track of whether a value was added to flag an error */
   private boolean m_assigned = false;
-  private ResourceBundle m_bundle;
   private String m_description;
   private JCommander m_jCommander;
 
@@ -73,17 +72,17 @@ public class ParameterDescription {
     m_object = object;
     m_parameterAnnotation = annotation;
     m_field = field;
-    m_bundle = bundle;
-    if (m_bundle == null) {
-      m_bundle = findResourceBundle(object);
+    ResourceBundle localBundle = bundle;
+    if (localBundle == null) {
+      localBundle = findResourceBundle(object);
     }
     m_jCommander = jCommander;
 
     m_description = annotation.description();
     if (! "".equals(annotation.descriptionKey())) {
-      if (m_bundle != null) {
-        m_description = m_bundle.getString(annotation.descriptionKey());
-      } else {
+      if (localBundle != null) {
+        m_description = localBundle.getString(annotation.descriptionKey());
+//      } else {
 //        System.out.println("Warning: field " + object.getClass() + "." + field.getName()
 //            + " has a descriptionKey but no bundle was defined with @ResourceBundle, using " +
 //            "default description:'" + m_description + "'");
