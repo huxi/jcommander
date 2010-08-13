@@ -32,7 +32,7 @@ import java.lang.annotation.Target;
 @Target({ TYPE })
 public @interface Parameters {
 
-  static final String DEFAULT_OPTION_PREFIXES = "-";
+  String DEFAULT_OPTION_PREFIXES = "-";
 
   /**
    * @return The name of the resource bundle to use for this class.
